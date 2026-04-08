@@ -83,29 +83,27 @@ body {
 
 .nav-logo {
   display: flex;
-  align-items: center;
+  align-items: baseline;
+  gap: 2px;
   text-decoration: none;
+}
+
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.nav-logo-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  margin-bottom: 2px;
   flex-shrink: 0;
-}
-
-.nav-logo-img {
-  height: 48px;          /* crisp on all screens — adjust if your logo needs more/less */
-  width: auto;
-  display: block;
-  object-fit: contain;
-  /* PNG with transparent bg renders fine on the dark navbar.
-     If your logo has a white background, add:
-     border-radius: 6px; or mix-blend-mode: lighten; */
-  transition: opacity 0.18s ease;
-}
-
-.nav-logo:hover .nav-logo-img {
-  opacity: 0.85;
-}
-
-/* Slightly smaller on mobile */
-@media (max-width: 480px) {
-  .nav-logo-img { height: 38px; }
 }
 
 .nav-links {
