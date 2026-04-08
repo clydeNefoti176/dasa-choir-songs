@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DASA Choir Songs — Browse and read our full collection of choir song lyrics." />
+  <meta property="og:title" content="DASA Choir Songs" />
+  <meta property="og:description" content="A full collection of choir song lyrics, beautifully presented." />
+  <meta name="theme-color" content="#1B5E20" />
+  <title>DASA Choir Songs</title>
+
+  <!-- Netlify Identity (required for CMS auth redirect) -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ NAVBAR ═══════════════════ -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo" aria-label="DASA Choir home">
+      <span class="nav-logo-text">DASA Choir</span>
+      <span class="nav-logo-dot" aria-hidden="true"></span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#songs">Songs</a></li>
+      <li><a href="/admin/" class="nav-admin">Admin ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════════════════ HERO ════════════════════ -->
+  <section class="hero" id="hero" role="banner" aria-label="Hero banner">
+
+    <!-- Slideshow background -->
+    <div class="slideshow-wrap" id="slideshowWrap" aria-hidden="true">
+      <div class="slide-fallback" id="slideFallback"></div>
+      <!-- Dynamic slides injected by app.js -->
+    </div>
+
+    <!-- Grain overlay -->
+    <div class="hero-grain" aria-hidden="true"></div>
+
+    <!-- Dark overlay -->
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <!-- Content -->
+    <div class="hero-content">
+      <div class="hero-eyebrow" aria-hidden="true">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">Harmony in Every Note</span>
+        <span class="eyebrow-line"></span>
+      </div>
+      <h1 class="hero-title">
+        DASA
+        <span class="hero-title-choir">Choir</span>
+      </h1>
+      <p class="hero-subtitle">Songs of Faith &nbsp;·&nbsp; Joy &nbsp;·&nbsp; Unity</p>
+      <div class="hero-actions">
+        <a href="#songs" class="btn-primary" aria-label="Browse song collection">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+          </svg>
+          Browse Songs
+        </a>
+        <a href="#songs" class="btn-secondary" aria-label="View full collection">
+          View Collection
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Slideshow dot controls -->
+    <div class="slideshow-controls" id="slideshowControls" role="tablist" aria-label="Slideshow navigation"></div>
+
+    <!-- Slide counter -->
+    <div class="slide-counter" id="slideCounter" aria-live="polite" aria-hidden="true"></div>
+
+  </section>
+
+  <!-- ════════════════════════════ STATS BAR ════════════════════ -->
+  <div class="stats-bar" aria-label="Collection stats">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-label">Total Songs</span>
+        <span class="stat-value" id="statSongs"><span>—</span></span>
+      </div>
+      <div class="stat-sep" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-label">Collection</span>
+        <span class="stat-value">DASA <span>Choir</span></span>
+      </div>
+      <div class="stat-sep" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-label">Access</span>
+        <span class="stat-value">Free <span>&amp;</span> Public</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ MAIN CONTENT ═══════════════════ -->
+  <main class="main" id="songs" role="main">
+
+    <!-- Section heading -->
+    <div class="section-head">
+      <div>
+        <p class="section-label">Our Collection</p>
+        <h2 class="section-title">Song Library</h2>
+      </div>
+      <p class="section-count" id="sectionCount" aria-live="polite"></p>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrap" role="search">
+      <svg class="search-ico" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input
+        type="search"
+        id="searchField"
+        class="search-field"
+        placeholder="Search songs by title…"
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Search songs by title"
+      />
+      <button class="search-clear" id="searchClear" aria-label="Clear search" title="Clear search">
+        <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <p class="search-status" id="searchStatus" aria-live="polite" aria-atomic="true"></p>
+    </div>
+
+    <!-- Song cards grid -->
+    <div class="songs-grid" id="songsGrid" role="list" aria-label="Song collection">
+
+      <!-- Skeleton loading state (shown while fetching) -->
+      <div class="skeleton-card" aria-hidden="true" role="presentation">
+        <div class="skeleton sk-tag"></div>
+        <div class="skeleton sk-title"></div>
+        <div class="skeleton sk-line"></div>
+        <div class="skeleton sk-line" style="width:85%"></div>
+        <div class="skeleton sk-line" style="width:70%"></div>
+        <div class="sk-footer"></div>
+        <div class="skeleton sk-link"></div>
+      </div>
+      <div class="skeleton-card" aria-hidden="true" role="presentation">
+        <div class="skeleton sk-tag"></div>
+        <div class="skeleton sk-title" style="width:55%"></div>
+        <div class="skeleton sk-line"></div>
+        <div class="skeleton sk-line" style="width:90%"></div>
+        <div class="skeleton sk-line" style="width:60%"></div>
+        <div class="sk-footer"></div>
+        <div class="skeleton sk-link"></div>
+      </div>
+      <div class="skeleton-card" aria-hidden="true" role="presentation">
+        <div class="skeleton sk-tag"></div>
+        <div class="skeleton sk-title" style="width:75%"></div>
+        <div class="skeleton sk-line"></div>
+        <div class="skeleton sk-line" style="width:80%"></div>
+        <div class="skeleton sk-line" style="width:65%"></div>
+        <div class="sk-footer"></div>
+        <div class="skeleton sk-link"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ════════════════════════════ FOOTER ══════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <p class="footer-brand-name">DASA <em>Choir</em></p>
+          <p class="footer-tagline">Lifting voices in harmony &mdash; one song at a time</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="/#songs">Song Library</a>
+          <a href="/admin/">Admin Panel</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; <span id="footerYear"></span> DASA Choir. All rights reserved.</p>
+        <p class="footer-note">Built with Decap CMS &amp; Netlify</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

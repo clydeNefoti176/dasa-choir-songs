@@ -1,0 +1,54 @@
+# ============================================================
+# DASA Choir Songs — netlify.toml
+# Netlify build & deployment configuration
+# ============================================================
+
+# ─── Build Settings ──────────────────────────────────────────
+# Pure static site — no build command needed.
+# Publish the root directory directly.
+[build]
+  publish = "."
+  command = ""   # No build step required
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# ─── Security Headers ────────────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options    = "nosniff"
+    X-XSS-Protection          = "1; mode=block"
+    Referrer-Policy           = "strict-origin-when-cross-origin"
+    Permissions-Policy        = "camera=(), microphone=(), geolocation=()"
+
+# Admin panel: never cache, never index
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    Cache-Control   = "no-store, no-cache, must-revalidate"
+    X-Robots-Tag    = "noindex, nofollow"
+
+# Data files: cache briefly (30 seconds) so CMS updates propagate quickly
+[[headers]]
+  for = "/data/*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=30, s-maxage=30, stale-while-revalidate=60"
+
+# Static assets: long cache
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# CSS/JS: moderate cache with revalidation
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"

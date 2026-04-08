@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Read song lyrics — DASA Choir" />
+  <meta name="theme-color" content="#1B5E20" />
+  <title>Song — DASA Choir</title>
+
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="song-page-wrap">
+
+  <!-- ═══════════════════════════════ NAVBAR ═══════════════════ -->
+  <nav class="navbar scrolled" id="navbar" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo" aria-label="DASA Choir home">
+      <span class="nav-logo-text">DASA Choir</span>
+      <span class="nav-logo-dot" aria-hidden="true"></span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="/#songs">Songs</a></li>
+      <li><a href="/admin/" class="nav-admin">Admin ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═════════════════════════ SONG HERO ══════════════════════ -->
+  <div class="song-hero" id="songHero">
+    <div class="song-hero-inner">
+
+      <a href="/" class="back-link" aria-label="Go back to all songs">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+        All Songs
+      </a>
+
+      <p class="song-hero-tag" id="songTag">Song</p>
+      <h1 class="song-hero-title" id="songTitle">Loading…</h1>
+      <div class="song-hero-line" aria-hidden="true"></div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════ SONG CONTENT ════════════════════ -->
+  <div class="song-content" id="songContent">
+
+    <!-- Lyrics card -->
+    <article class="lyrics-card" id="lyricsCard" aria-label="Song lyrics">
+      <!-- Skeleton while loading -->
+      <div id="lyricsSkeleton">
+        <div class="skeleton sk-line" style="width:100%; height:16px; margin-bottom:14px;"></div>
+        <div class="skeleton sk-line" style="width:88%; height:16px; margin-bottom:14px;"></div>
+        <div class="skeleton sk-line" style="width:72%; height:16px; margin-bottom:28px;"></div>
+        <div class="skeleton sk-line" style="width:100%; height:16px; margin-bottom:14px;"></div>
+        <div class="skeleton sk-line" style="width:92%; height:16px; margin-bottom:14px;"></div>
+        <div class="skeleton sk-line" style="width:80%; height:16px; margin-bottom:28px;"></div>
+        <div class="skeleton sk-line" style="width:100%; height:16px; margin-bottom:14px;"></div>
+        <div class="skeleton sk-line" style="width:65%; height:16px; margin-bottom:14px;"></div>
+        <div class="skeleton sk-line" style="width:85%; height:16px; margin-bottom:14px;"></div>
+      </div>
+    </article>
+
+    <!-- Sidebar -->
+    <aside class="song-sidebar" id="songSidebar" aria-label="Song details" aria-hidden="true">
+      <div class="sidebar-card">
+        <div class="sidebar-card-head">
+          <p class="sidebar-card-label">Song Details</p>
+          <p class="sidebar-card-title" id="sidebarTitle">—</p>
+        </div>
+        <div class="sidebar-card-body">
+          <div class="sidebar-info">
+            <div class="sidebar-info-row">
+              <span class="sidebar-info-icon" aria-hidden="true">🎵</span>
+              <span>DASA Choir Collection</span>
+            </div>
+            <div class="sidebar-info-row">
+              <span class="sidebar-info-icon" aria-hidden="true">📖</span>
+              <span id="sidebarLineCount">—</span>
+            </div>
+            <div class="sidebar-info-row">
+              <span class="sidebar-info-icon" aria-hidden="true">🎤</span>
+              <span>Choir Performance</span>
+            </div>
+          </div>
+          <a href="/" class="sidebar-back" aria-label="Back to all songs">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" aria-hidden="true">
+              <path d="M19 12H5M12 5l-7 7 7 7"/>
+            </svg>
+            Back to All Songs
+          </a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ════════════════════════════ FOOTER ══════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <p class="footer-brand-name">DASA <em>Choir</em></p>
+          <p class="footer-tagline">Lifting voices in harmony &mdash; one song at a time</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="/#songs">Song Library</a>
+          <a href="/admin/">Admin Panel</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; <span id="footerYear"></span> DASA Choir. All rights reserved.</p>
+        <p class="footer-note">Built with Decap CMS &amp; Netlify</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
