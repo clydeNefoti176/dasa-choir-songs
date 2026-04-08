@@ -17,22 +17,16 @@ backend:
     deleteMedia:  'chore(assets): delete "{{path}}"'
 
 # ─── Media & Public Folder ────────────────────────────────────
-# Where uploaded images are saved in the repo
 media_folder: "assets/images"
-
-# The public URL path for those images
 public_folder: "/assets/images"
 
 # ─── CMS UI Settings ─────────────────────────────────────────
 locale: en
-site_url: /   # Set this to your live Netlify URL for the preview button
 
 # ─── Collections ─────────────────────────────────────────────
 collections:
 
   # ── Songs Collection ────────────────────────────────────────
-  # All songs are stored in a single JSON file as an array.
-  # Admin can add, edit, reorder, and delete songs here.
   - name: "songs"
     label: "🎵 Songs"
     files:
@@ -54,9 +48,6 @@ collections:
                 name: "title"
                 widget: "string"
                 hint: "The full title of the song as it will appear on the website."
-                pattern:
-                  - ".{1,120}"
-                  - "Title must be between 1 and 120 characters"
 
               - label: "Lyrics"
                 name: "lyrics"
@@ -64,32 +55,27 @@ collections:
                 hint: "Paste or type the full lyrics. Line breaks are preserved automatically."
 
   # ── Slideshow Images Collection ──────────────────────────────
-  # Manages the hero slideshow on the homepage.
-  # Images are uploaded to /assets/images/ and referenced here.
+  # FIX: Uses a single `field` (not `fields` array) so Decap CMS
+  # saves a clean string array: ["/assets/images/a.jpg", ...]
+  # This is the most reliable format — no object/string mismatch.
   - name: "slideshow"
     label: "🖼️ Slideshow Images"
     files:
       - label: "Slideshow Images"
         name: "slideshow_images"
         file: "data/slideshow.json"
-        description: "Upload and manage the hero slideshow images shown on the homepage."
+        description: "Upload images for the homepage hero slideshow. Each image rotates automatically."
         fields:
           - label: "Images"
             name: "images"
             widget: "list"
             label_singular: "Image"
-            summary: "{{fields.caption | default('Untitled Image')}}"
-            add_to_top: true
-            collapsed: false
-            fields:
-              - label: "Image"
-                name: "image"
-                widget: "image"
-                allow_multiple: false
-                hint: "Recommended size: 1920×1080px or wider. JPG/PNG/WebP accepted."
-
-              - label: "Caption (optional)"
-                name: "caption"
-                widget: "string"
-                required: false
-                hint: "An optional short description for accessibility purposes."
+            add_to_top: false
+            # Single `field` (not `fields`) = saves as plain string array
+            # ["path1.jpg", "path2.jpg"] — no format ambiguity
+            field:
+              label: "Image File"
+              name: "image"
+              widget: "image"
+              allow_multiple: false
+              hint: "Recommended: 1920×1080px, JPG/PNG/WebP, under 2MB."
