@@ -158,8 +158,9 @@ body {
 /* ─── Hero Section ───────────────────────────────────────────── */
 .hero {
   position: relative;
+  height: 100vh; 
   height: 100svh;
-  min-height: 640svh;
+  min-height: 640px;
   display: flex;
   align-items: center;
   justify-content: center;
